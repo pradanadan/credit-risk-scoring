@@ -7,7 +7,7 @@
 get_ipython().system(' pip install sklearn')
 
 
-# In[26]:
+# In[1]:
 
 
 import pandas as pd
@@ -24,6 +24,7 @@ from sklearn import svm
 from sklearn.ensemble import RandomForestClassifier
 from sklearn import metrics
 from sklearn.model_selection import KFold
+from numpy import save
 
 
 # In[2]:
@@ -72,7 +73,7 @@ normalize.fit(x)
 x = normalize.transform(x)
 
 
-# In[20]:
+# In[8]:
 
 
 print(x)
@@ -118,13 +119,13 @@ confusion_matrix(y_test, y_predicted)
 #The number of true positive is 64; false positive is 5; false negative is 18; and true negative is 13 
 
 
-# In[24]:
+# In[15]:
 
 
 #Logistic Regression, SVC, Random Forest
 
 
-# In[31]:
+# In[16]:
 
 
 kf = KFold(n_splits=10)
@@ -165,7 +166,7 @@ for train_index, test_index in kf.split(x):
             pickle.dump(ranForest, f)
 
 
-# In[32]:
+# In[18]:
 
 
 print("Accuracy of Logistic Regression: ", acc_logisticReg)
@@ -173,13 +174,21 @@ print("Accuracy of SVC: ", acc_svc)
 print("Accuracy of Random Forest: ", acc_ranForest)
 
 
-# In[33]:
+# In[19]:
+
+
+#Save numpy data to a file
+save("x_data.npy", x)
+save("y_data.npy", y)
+
+
+# In[20]:
 
 
 #Load models from pickle
 
 
-# In[34]:
+# In[21]:
 
 
 pickle_in = open("logisticReg.pickle", "rb")
@@ -190,4 +199,10 @@ svc = pickle.load(pickle_in)
 
 pickle_in = open("ranForest.pickle", "rb")
 ranForest = pickle.load(pickle_in)
+
+
+# In[ ]:
+
+
+
 
